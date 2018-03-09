@@ -104,16 +104,21 @@ const CSVDocument = function (url) {
     var self = {};
 
     self.build = function () {
+        console.log("1");
         d3.csv(url, createBlips);
+	    console.log("2");
     }
 
     var createBlips = function (data) {
         try {
             var columnNames = data['columns'];
             delete data['columns'];
+            console.log("3");
             var contentValidator = new ContentValidator(columnNames);
+            console.log("4");
             contentValidator.verifyContent();
             contentValidator.verifyHeaders();
+console.log("5");
             var blips = _.map(data, new InputSanitizer().sanitize);
             plotRadar(FileName(url), blips);
         } catch (exception) {
@@ -122,6 +127,7 @@ const CSVDocument = function (url) {
     }
 
     self.init = function () {
+        console.log('initialising sheet');
         plotLoading();
         return self;
     };
@@ -169,7 +175,10 @@ const GoogleSheetInput = function () {
         var domainName = DomainName(window.location.search.substring(1));
         var queryParams = QueryParams(window.location.search.substring(1));
 
+        console.log('building');
+
         if (domainName && queryParams.sheetId.endsWith('csv')) {
+            console.log('got a csv');
             var sheet = CSVDocument(queryParams.sheetId);
             sheet.init().build();
         }
@@ -206,6 +215,7 @@ function set_document_title() {
 }
 
 function plotLoading(content) {
+    console.log('loading plot');
     var content = d3.select('body')
         .append('div')
         .attr('class', 'loading')

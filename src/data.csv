@@ -1,0 +1,2 @@
+name,ring,quadrant,isNew,description,lastModified,lastModifiedBy,usedBy
+Lightweight architecture decision records,trial,techniques,FALSE,"Record significant decisions, along with their context and consequences, in source control, alongside the code.",27-Feb-18,Dave Knight,
